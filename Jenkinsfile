@@ -6,7 +6,7 @@ pipeline {
     }
 
     tools {
-        maven 'maven-3.9.5' // Для сборки бэкенда нужен Maven
+        maven 'maven-3.8.1' // Для сборки бэкенда нужен Maven
         jdk 'jdk16' // И Java Developer Kit нужной версии
         nodejs 'node-16' // А NodeJS нужен для фронта
     }
@@ -39,11 +39,14 @@ pipeline {
             steps {
                 archiveArtifacts(artifacts: 'backend/target/sausage-store-0.0.1-SNAPSHOT.jar')
                 archiveArtifacts(artifacts: 'frontend/dist/frontend/*')
-            post {
+				
+			post {
                 success {
-                curl -X POST -H 'Content-type: application/json' --data '{"chat_id": "-1002134018008", "text": "Садовский Денис собрал приложение." }' https://api.telegram.org/bot5933756043:AAE8JLL5KIzgrNBeTP5e-1bkbJy4YRoeGjs/sendMessage
-                }
+                    curl -X POST -H 'Content-type: application/json' --data '{"chat_id": "-1002134018008", "text": "Садовский Денис собрал приложение." }' https://api.telegram.org/bot5933756043:AAE8JLL5KIzgrNBeTP5e-1bkbJy4YRoeGjs/sendMessage
+			        }
+            
+                }	
             }
         }
     }
-
+} 
