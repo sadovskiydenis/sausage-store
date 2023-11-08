@@ -3,7 +3,7 @@ pipeline {
         label 'main'
     }
     tools {
-        maven 'maven-3.9.5' 
+        maven '3.9.5' 
     }
     stages {
         stage('Example') {
