@@ -1,9 +1,7 @@
 pipeline {
-    agent {
-        label 'main'
-    }
-    tools {
-        maven '3.9.5' 
+    agent any
+    tools { 
+        Maven '3.9.5' 
     }
     stages {
         stage('Example') {
