@@ -1,10 +1,9 @@
 pipeline {
-    agent any
-    enviroment {
-        PATH = "/usr/bin:$PATH"
+    agent {
+        label 'main'
     }
     tools {
-        maven 'apache-maven-3.6.3' 
+        maven 'maven-3.9.5' 
     }
     stages {
         stage('Example') {
