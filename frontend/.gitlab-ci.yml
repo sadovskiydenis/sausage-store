@@ -1,3 +1,7 @@
+stages:
+  - build
+  - notify
+
 build-frontend-code-job:
   stage: build  
   only:
@@ -11,9 +15,6 @@ build-frontend-code-job:
     paths:
       - frontend/dist/frontend 
 	  
-stages:
-  - notify
-
 telegram-notification-frontend:
   stage: notify
   only:
