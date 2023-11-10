@@ -24,6 +24,6 @@ telegram-notification-backend:
     variables:
     - $CI_COMMIT_MESSAGE =~ /send notification/   
   script:
-    - 'curl -X POST -H 'Content-type: application/json' --data "{\"chat_id\": \"${CHAT_ID}\", \"text\": \"test"}" $TELEGRAM_WEB_HOOK'
+    - curl -X POST -H 'Content-type: application/json' --data "{\"chat_id\": \"${CHAT_ID}\", \"text\": \"test"}" $TELEGRAM_WEB_HOOK
   needs:
     - build-backend-code-job
