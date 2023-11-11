@@ -24,6 +24,6 @@ telegram-notification-backend:
     variables:
     - $CI_COMMIT_MESSAGE =~ /send notification/
   script:
-    - sh ci-notify.sh "test"
+    - sh ci-notify.sh
   needs:
     - build-backend-code-job
