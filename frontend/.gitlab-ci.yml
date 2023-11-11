@@ -1,7 +1,6 @@
 stages:
   - build
   - notify
-
 build-frontend-code-job:
   stage: build  
   only:
@@ -13,8 +12,7 @@ build-frontend-code-job:
     - npm run build
   artifacts:
     paths:
-      - frontend/dist/frontend 
-	  
+    - frontend/dist/frontend 
 telegram-notification-frontend:
   stage: notify
   only:
@@ -24,3 +22,4 @@ telegram-notification-frontend:
     - sh ci-notify.sh "front готовченко"
   needs:
     - build-frontend-code-job
+
