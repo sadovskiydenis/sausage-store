@@ -14,7 +14,7 @@ build-backend-code-job:
     - backend/*
   script:
     - cd backend
-    - mvn package
+    - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
   artifacts:
     paths:
     - backend/target/sausage-store-0.0.1-SNAPSHOT.jar
@@ -26,6 +26,8 @@ spotbugs-sast:  #
     - MAVEN_REPO_PATH: ${CI_PROJECT_DIR}/.m2/repository  #
   script:  #
     - ls -l /builds/std-024-40/sausage-store/backend/  #
+  needs:  #
+    - build-backend-code-job  #
 telegram-notification-backend:
   variables:
     CHAT_ID: "-1002134018008"
