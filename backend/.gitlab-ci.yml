@@ -22,9 +22,9 @@ build-backend-code-job:
 spotbugs-sast:  #
   stage: test
   variables:  #
-    - COMPILE: "false"  #
-    - SAST_JAVA_VERSION: 11  #
-    - MAVEN_REPO_PATH: ${CI_PROJECT_DIR}/.m2/repository  #
+    COMPILE: "false"  #
+    SAST_JAVA_VERSION: 11  #
+    MAVEN_REPO_PATH: ${CI_PROJECT_DIR}/.m2/repository  #
   script:  #
     - ls -l /builds/std-024-40/sausage-store/backend/  #
   needs:  #
