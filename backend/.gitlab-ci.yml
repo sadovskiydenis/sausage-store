@@ -42,7 +42,7 @@ sonarqube-backend-sast:
     - .sonar/cache
   script:
     - cd backend
-    - mvn -X verify sonar:sonar -Dsonar.qualitygate.wait=true -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository -Dsonar.projectName=${SONAR_PROJECT_KEY_B} -Dsonar.host.url=https://sonarqube.praktikum-services.ru -Dsonar.login=${SONAR_LOGIN_B}
+    - mvn -X verify sonar:sonar -Dsonar.qualitygate.wait=true -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository -Dsonar.projectName=${SONAR_PROJECT_KEY_B} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_LOGIN_B}
   needs:
     - build-backend-code-job
 #telegram-notification-backend:
