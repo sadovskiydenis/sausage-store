@@ -31,7 +31,7 @@ spotbugs-sast:  #
     - build-backend-code-job  #
 sonarqube-backend-sast:
   stage: test
-    image: maven:3.8-openjdk-16
+  image: maven:3.8-openjdk-16
   variables:
     MAVEN_REPO_PATH: ${CI_PROJECT_DIR}/.m2/repository
 #    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
