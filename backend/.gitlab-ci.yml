@@ -15,7 +15,7 @@ build-backend-code-job:
   script:
     - cd backend
     - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
-    - ls -l /builds/std-024-40/sausage-store/backend/  #
+#    - ls -l /builds/std-024-40/sausage-store/backend/  #
   artifacts:
     paths:
     - backend/target/sausage-store-0.0.1-SNAPSHOT.jar
@@ -25,8 +25,8 @@ spotbugs-sast:  #
     COMPILE: "false"  #
     SAST_JAVA_VERSION: 11  #
     MAVEN_REPO_PATH: ${CI_PROJECT_DIR}/.m2/repository  #
-  script:  #
-    - ls -l /builds/std-024-40/sausage-store/backend/  #
+#  script:  #
+#    - ls -l /builds/std-024-40/sausage-store/backend/  #
   needs:  #
     - build-backend-code-job  #
 sonarqube-backend-sast:
