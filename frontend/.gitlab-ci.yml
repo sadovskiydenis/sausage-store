@@ -49,6 +49,8 @@ telegram-notification-frontend:
 ##    - sh ci-notify.sh
   needs:
     - build-frontend-code-job
-    ref: release-0.0.1
-    artifacts: true
+    ref: 
+    - release-0.0.1
+    artifacts: 
+    - true
 
