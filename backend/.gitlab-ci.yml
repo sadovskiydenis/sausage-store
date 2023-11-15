@@ -1,35 +1,35 @@
 stages:
   - build
   - notify
-  - test   #job2
-include:  #
-  - template: Security/SAST.gitlab-ci.yml  #
+  - test
+include:
+  - template: Security/SAST.gitlab-ci.yml
 build-backend-code-job:
   stage: build
-  cache:  #job2
-    paths:  #job2
-    - ${CI_PROJECT_DIR}/.m2/repository  #job2
+  cache:
+    paths:
+    - ${CI_PROJECT_DIR}/.m2/repository
   only:
     changes:
     - backend/*
   script:
     - cd backend
     - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
-    - ls -l /builds/std-024-40/sausage-store/backend/  #
+    - ls -l /builds/std-024-40/sausage-store/backend/
     - echo ${CI_JOB_NAME}
   artifacts:
     paths:
     - backend/target/sausage-store-0.0.1-SNAPSHOT.jar
-spotbugs-sast:  #
+spotbugs-sast:
   stage: test
-  variables:  #
-    COMPILE: "false"  #
-    SAST_JAVA_VERSION: 11  #
-    MAVEN_REPO_PATH: ${CI_PROJECT_DIR}/.m2/repository  #
-  script:  #
-    - ls -l /builds/std-024-40/sausage-store/backend/  #
-  needs:  #
-    - build-backend-code-job  #
+  variables:
+    COMPILE: "false"
+    SAST_JAVA_VERSION: 11
+    MAVEN_REPO_PATH: ${CI_PROJECT_DIR}/.m2/repository
+  script:
+    - ls -l /builds/std-024-40/sausage-store/backend/
+  needs:
+    - build-backend-code-job
 sonarqube-backend-sast:
   stage: test
   image: maven:3.8-openjdk-16
@@ -44,20 +44,20 @@ sonarqube-backend-sast:
     - mvn -X verify sonar:sonar -Dsonar.qualitygate.wait=true -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository -Dsonar.projectKey=${SONAR_PROJECT_KEY_B} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_LOGIN_B}
   needs:
     - build-backend-code-job
-#telegram-notification-backend:
-#  variables:
-#    CHAT_ID: "-1002134018008"
-#    URL_TELEGRAM_BOT: "https://api.telegram.org/bot5933756043:AAE8JLL5KIzgrNBeTP5e-1bkbJy4YRoeGjs/sendMessage"
-#  stage: notify
-#  only:
-#    changes:
-#    - backend/*
-#  only:
-#    variables:
-#    - $CI_COMMIT_MESSAGE =~ /send notification/
-#  script:
+telegram-notification-backend:
+  variables:
+    CHAT_ID: "-1002134018008"
+    URL_TELEGRAM_BOT: "https://api.telegram.org/bot5933756043:AAE8JLL5KIzgrNBeTP5e-1bkbJy4YRoeGjs/sendMessage"
+  stage: notify
+  only:
+    changes:
+    - backend/*
+  only:
+    variables:
+    - $CI_COMMIT_MESSAGE =~ /send notification/
+  script:
 #    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"-1002134018008\", \"text\": \"CI: test:\"}" https://api.telegram.org/bot5933756043:AAE8JLL5KIzgrNBeTP5e-1bkbJy4YRoeGjs/sendMessage '
-#    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал backend + SAST. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/artifacts/$CI_COMMIT_SHA/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
+    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал backend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/artifacts/$CI_COMMIT_SHA/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
 ##    - sh ci-notify.sh
-#  needs:
-#    - build-backend-code-job
+  needs:
+    - build-backend-code-job
