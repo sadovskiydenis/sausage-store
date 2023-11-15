@@ -11,10 +11,10 @@ build-frontend-code-job:
     - cd frontend
     - npm install
     - npm run build
-    - echo "CI_JOB_ID=build_job_id" >> build_id.env
+    - echo "MY_ENV_VAR=env_$CI_JOB_ID" > .buildenv
   artifacts:
     reports:
-      dotenv: build_id.env
+      dotenv: .buildenv
     name: "$CI_JOB_NAME"   #
     paths:
     - frontend/dist/frontend
@@ -45,7 +45,7 @@ telegram-notification-frontend:
     variables:
     - $CI_COMMIT_MESSAGE =~ /send notification/
   script:
-    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал frontend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
+    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал frontend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/$MY_ENV_VAR/artifacts/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
 ##    - sh ci-notify.sh
   needs:
     - project: std-024-40/sausage-store
