@@ -15,7 +15,7 @@ build-frontend-code-job:
     - npm run build
 #   - echo ${CI_JOB_NAME}
   artifacts:
-    name: "$CI_JOB_NAME"
+    name: "$CI_JOB_NAME"   #
     paths:
     - frontend/dist/frontend
 sonarqube-frontend-sast:
@@ -34,6 +34,7 @@ sonarqube-frontend-sast:
   - build-frontend-code-job 
 telegram-notification-frontend:
   variables:
+    CI_JOB_NAME: build-frontend-code-job
     CHAT_ID: "-1002134018008"
     URL_TELEGRAM_BOT: "https://api.telegram.org/bot5933756043:AAE8JLL5KIzgrNBeTP5e-1bkbJy4YRoeGjs/sendMessage"
   stage: notify
@@ -44,7 +45,7 @@ telegram-notification-frontend:
     variables:
     - $CI_COMMIT_MESSAGE =~ /send notification/
   script:
-    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал frontend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/artifacts/$CI_COMMIT_SHA/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
+    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал frontend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/$CI_COMMIT_SHA/artifacts/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
 ##    - sh ci-notify.sh
   needs:
     - build-frontend-code-job
