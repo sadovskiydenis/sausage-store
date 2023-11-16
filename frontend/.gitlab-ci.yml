@@ -48,9 +48,9 @@ telegram-notification-frontend:
     - echo ${BUILD_JOB_VAR}
     - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал frontend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/$BUILD_JOB_VAR/artifacts/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
   needs:
-    - build-frontend-code-job
-#    - project: std-024-40/sausage-store
+#    - build-frontend-code-job
+    - project: std-024-40/sausage-store
       ref: release-0.0.1
-#      job: build-frontend-code-job
+      job: build-frontend-code-job
       artifacts: true
 
