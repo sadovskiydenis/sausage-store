@@ -11,7 +11,7 @@ build-frontend-code-job:
     - cd frontend
     - npm install
     - npm run build
-    - echo "$CI_JOB_ID=BUILD_JOB_VAR" >> frontend/build.env
+    - echo "$CI_JOB_ID=BUILD_JOB_VAR" >> build.env
   artifacts:
     reports:
       dotenv: build.env
@@ -50,6 +50,5 @@ telegram-notification-frontend:
   needs:
     - project: std-024-40/sausage-store
       job: build-frontend-code-job
-      ref: release-0.0.1
       artifacts: true
 
