@@ -13,7 +13,7 @@ build-backend-code-job:
     - ${CI_PROJECT_DIR}/.m2/repository
   only:
     changes:
-    - backend/*
+    - backend/*/**
   script:
     - cd backend
     - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
