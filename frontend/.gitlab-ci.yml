@@ -11,7 +11,7 @@ build-frontend-code-job:
     - cd frontend
     - npm install
     - npm run build
-    - echo "$CI_JOB_ID=BUILD_JOB_VAR" >> build.env
+    - echo "BUILD_JOB_VAR=env_$CI_JOB_ID" >> build.env
   artifacts:
     reports:
       dotenv: build.env
@@ -48,7 +48,9 @@ telegram-notification-frontend:
     - echo ${BUILD_JOB_VAR}
     - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал frontend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/$BUILD_JOB_VAR/artifacts/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
   needs:
-    - project: std-024-40/sausage-store
-      job: build-frontend-code-job
-      artifacts: true
+    - build-frontend-code-job
+#    - project: std-024-40/sausage-store
+#      ref: release-0.0.1
+#      job: build-frontend-code-job
+#      artifacts: true
 
