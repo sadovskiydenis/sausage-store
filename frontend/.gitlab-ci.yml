@@ -6,7 +6,7 @@ build-frontend-code-job:
   stage: build  
   only:
     changes:
-    - frontend/*/**
+    - frontend/*
   script:        
     - cd frontend
     - npm install
