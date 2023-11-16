@@ -50,7 +50,7 @@ telegram-notification-frontend:
   needs:
     - build-frontend-code-job
 #    - project: std-024-40/sausage-store
-#      ref: release-0.0.1
+      ref: release-0.0.1
 #      job: build-frontend-code-job
-#      artifacts: true
+      artifacts: true
 
