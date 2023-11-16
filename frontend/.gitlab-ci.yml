@@ -5,7 +5,7 @@ stages:
 set_env:
   stage: .pre
   script:
-    echo "BUILD_JOB_VAR=env_$CI_JOB_ID" >> build.env
+    echo "BUILD_JOB_VAR=$CI_JOB_ID" > build.env
   artifacts:
     reports:
       dotenv: build.env
