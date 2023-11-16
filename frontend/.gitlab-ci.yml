@@ -10,7 +10,7 @@ stages:
 #    reports:
 #      dotenv: build.env
 build-frontend-code-job:
-#  stage: .pre
+  stage: .pre
   script:
     echo "BUILD_JOB_VAR=$CI_JOB_ID" > build.env
   artifacts:
