@@ -16,8 +16,8 @@ build-backend-code-job:
     - backend/*
   script:
     - cd backend
-    - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
-    - ls -l /builds/std-024-40/sausage-store/backend/
+    - mvn package
+#    - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
     - echo "VAR_JOB_ID=${CI_JOB_ID}" >> build.env
   artifacts:
     reports:
