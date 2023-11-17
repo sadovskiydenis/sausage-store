@@ -25,7 +25,6 @@ build-frontend-code-job:
     - npm install
     - npm run build
     - echo "{BUILD_JOB_VAR=$CI_JOB_ID}" >> build.env
-#    - echo ${BUILD_JOB_VAR}
   artifacts:
     reports:
       dotenv: build.env
