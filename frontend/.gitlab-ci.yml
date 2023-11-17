@@ -15,7 +15,7 @@ build-frontend-code-job:   # задача с именем build-code-job
   artifacts:   # блок, отвечающий за сохранение файлов как артефактов в Gitlab
     reports:
       dotenv: build.env
-#    name: "$CI_JOB_NAME"   
+##    name: "$CI_JOB_NAME"   
     paths:
     - frontend/dist/frontend
 sonarqube-frontend-sast:
