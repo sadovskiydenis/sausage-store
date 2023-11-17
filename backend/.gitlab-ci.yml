@@ -15,7 +15,7 @@ build-backend-code-job:
   script:
     - cd backend
     - mvn package
-#    - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
+##    - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
     - echo "VAR_JOB_ID=${CI_JOB_ID}" >> build.env
   artifacts:
     reports:
