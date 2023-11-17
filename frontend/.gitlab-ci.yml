@@ -24,17 +24,14 @@ build-frontend-code-job:
     - cd frontend
     - npm install
     - npm run build
+    - echo "{BUILD_JOB_VAR=$CI_JOB_ID}" >> build.env
     - echo ${BUILD_JOB_VAR}
-  artifacts:
-    name: "$CI_JOB_NAME"   
-    paths:
-    - frontend/dist/frontend
-  stage: .post
-  script:
-    echo "BUILD_JOB_VAR=$CI_JOB_ID" > build.env
   artifacts:
     reports:
       dotenv: build.env
+    name: "$CI_JOB_NAME"   
+    paths:
+    - frontend/dist/frontend
 sonarqube-frontend-sast:
   stage: test
   image: 
