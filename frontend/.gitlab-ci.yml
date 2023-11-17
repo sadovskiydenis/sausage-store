@@ -2,28 +2,26 @@ stages:
   - build
   - notify
   - test
-build-frontend-code-job:
-  stage: build
-  only:
+build-frontend-code-job:   # задача с именем build-code-job
+  stage: build   # этап build
+  only:   # запуск этого шага только при изменениях в директориях backend и frontend
     changes:
     - frontend/*
-  script:
+  script:   # объявление скрипта
     - cd frontend
-    - npm install
-    - npm run build
-    - echo "{BUILD_JOB_VAR=$CI_JOB_ID}" >> build.env
-  artifacts:
+    - npm install   # загрузка всех сторонних зависимостей
+    - npm run build   # запуск сборки кода
+    - echo "BUILD_JOB_VAR={$CI_JOB_ID}" >> build.env
+  artifacts:   # блок, отвечающий за сохранение файлов как артефактов в Gitlab
     reports:
       dotenv: build.env
 #    name: "$CI_JOB_NAME"   
     paths:
-    - $CI_PROJECT_DIR/*
-#    - frontend/dist/frontend
+    - frontend/dist/frontend
 sonarqube-frontend-sast:
   stage: test
   image:
     name: sonarsource/sonar-scanner-cli:latest
-#   variables:
   cache:
     key: "${CI_JOB_NAME}"
     paths:
