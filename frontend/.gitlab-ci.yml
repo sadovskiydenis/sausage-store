@@ -11,7 +11,7 @@ build-frontend-code-job:   # задача с именем build-code-job
     - cd frontend
     - npm install   # загрузка всех сторонних зависимостей
     - npm run build   # запуск сборки кода
-    - echo "BUILD_JOB_VAR={$CI_JOB_ID}" >> build.env
+    - echo "BUILD_JOB_VAR={$CI_JOB_ID}" >> /builds/std-024-40/sausage-store/build.env
   artifacts:   # блок, отвечающий за сохранение файлов как артефактов в Gitlab
     reports:
       dotenv: build.env

@@ -16,7 +16,7 @@ build-backend-code-job:
     - cd backend
     - mvn package
 ##    - mvn -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository package
-    - echo "VAR_JOB_ID=${CI_JOB_ID}" >> build.env
+    - echo "VAR_JOB_ID=${CI_JOB_ID}" >> /builds/std-024-40/sausage-store/build.env
   artifacts:
     reports:
       dotenv: build.env
