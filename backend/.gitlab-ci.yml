@@ -61,6 +61,6 @@ telegram-notification-backend:
   script:
 #    - echo "${VAR_JOB_ID}"
     - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"Садовский Денис собрал backend. Ссылка на артефакт: $CI_PROJECT_URL/-/jobs/$VAR_JOB_ID/artifacts/download?job=$CI_JOB_NAME\"}" $URL_TELEGRAM_BOT '
-#    - sh ci-notify.sh
+##    - sh ci-notify.sh
   needs:
     - build-backend-code-job
