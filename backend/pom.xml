@@ -12,7 +12,7 @@
         <repository>
             <id>sausage-store</id>
             <name>sausage-store</name>
-            <url>${env.NEXUS_REPO_URL}/NEXUS_REPO_BACKEND_NAME/</url>
+            <url>${env.NEXUS_REPO_URL}/${NEXUS_REPO_BACKEND_NAME}/</url>
         </repository>
     </distributionManagement>
     <groupId>com.yandex.practicum.devops</groupId>
