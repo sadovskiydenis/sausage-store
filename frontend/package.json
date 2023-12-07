@@ -1,10 +1,10 @@
 {
   "name": "frontend",
-  "version": "0.0.0",
+  "version": "${VERSION}",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy-conf.json",
-    "build": "ng build",
+    "build": "ng build" --output-path dist/frontend-${VERSION}",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

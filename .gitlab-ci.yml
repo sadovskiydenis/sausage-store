@@ -1,3 +1,5 @@
+variables:   #for nexus
+    VERSION: 0.0.${CI_PIPELINE_ID}   #for nexus
 include:
   - local: 'backend/.gitlab-ci.yml'
   - local: 'frontend/.gitlab-ci.yml'
