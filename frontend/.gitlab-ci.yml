@@ -12,7 +12,7 @@ build-frontend-code-job:   # задача с именем build-code-job
     - cd frontend
     - npm install   # загрузка всех сторонних зависимостей
     - npm run build   # запуск сборки кода
-#    - echo "BUILD_JOB_VAR=${CI_JOB_ID}" >> /builds/std-024-40/sausage-store/build.env    #с этой фигней долго мучался, по каокой-то непонятной причине срабатывает только полный путь до файла
+    - echo "BUILD_JOB_VAR=${CI_JOB_ID}" >> /builds/std-024-40/sausage-store/build.env    #с этой фигней долго мучался, по каокой-то непонятной причине срабатывает только полный путь до файла
   artifacts:   # блок, отвечающий за сохранение файлов как артефактов в Gitlab
     reports:
       dotenv: build.env
@@ -26,7 +26,7 @@ upload-frontend-release:
   needs:
     - build-frontend-code-job
   script:
-    - cd frontend/dist/frontend
+    - cd frontend/dist/
     - tar czvf sausage-store-${VERSION}.tar.gz frontend
     - curl -v -u "${NEXUS_REPO_USER}:${NEXUS_REPO_PASS}" --upload-file sausage-store-${VERSION}.tar.gz ${NEXUS_REPO_URL}/${NEXUS_REPO_FRONTEND_NAME}/${VERSION}/sausage-store-${VERSION}.tar.gz
 sonarqube-frontend-sast:
