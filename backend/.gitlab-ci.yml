@@ -56,10 +56,7 @@ upload-backend-release:
     - build-backend-code-job
   script:
     - cd backend
-    - >
-   mvn deploy -DskipTests
-   -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository
-   -s settings.xml -Dversion.application=${VERSION}
+    - mvn deploy -DskipTests -Dmaven.repo.local=${CI_PROJECT_DIR}/.m2/repository -s settings.xml -Dversion.application=${VERSION}
 telegram-notification-backend:
   variables:
     CI_JOB_NAME: build-backend-code-job
