@@ -22,7 +22,7 @@ build-backend-code-job:
     reports:
       dotenv: build.env
     paths:
-    - backend/target/sausage-${VERSION}.jar
+    - backend/target/sausage-store-${VERSION}.jar
 spotbugs-sast:
   stage: test
   variables:
@@ -51,7 +51,7 @@ upload-backend-release:
   stage: release
   only:
     changes:
-      - backend/**/*
+      - backend/*
   needs:
     - build-backend-code-job
   script:
