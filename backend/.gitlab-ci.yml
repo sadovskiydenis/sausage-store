@@ -15,6 +15,7 @@ stages:
   - test
 include:
   - template: Security/SAST.gitlab-ci.yml
+#stage: build
 build-backend-code-job:
   stage: build
   cache:
@@ -33,6 +34,7 @@ build-backend-code-job:
       dotenv: build.env
     paths:
     - backend/target/sausage-store-${VERSION}.jar
+#stage: test
 spotbugs-sast:
   stage: test
   variables:
@@ -83,7 +85,13 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
   script:
      #выполняем простую команду для проверки
-     - ssh ${DEV_USER}@${DEV_HOST} "id" 
+     - ssh ${DEV_USER}@${DEV_HOST} #"id"
+# скачиваем ранее собранный артефакт с Nexus. При этом необходимо заранее
+  # прописать креды от Nexus в переменные в настройке пайплайна
+  - curl -u ${NEXUS_REPO_USER}:${NEXUS_REPO_PASS} -o sausage-store-${VERSION}.jar ${NEXUS_REPO_URL}/${NEXUS_REPO_BACKEND_NAME}/com/yandex/practicum/devops/sausage-store/${VERSION}/sausage-store-${VERSION}.jar
+ # запускаем бэкенд  
+  - java -jar sausage-store-${VERSION}.jar & 
+#stage: notify
 #telegram-notification-backend:
 #  variables:
 #    CI_JOB_NAME: build-backend-code-job
