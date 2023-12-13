@@ -2,7 +2,7 @@
 Description=Backend service
 
 [Service]
-ExecStart=java -jar /var/www-data/bin/sausage-store-0.0.1-SNAPSHOT.jar
+ExecStart=java -jar /var/www-data/bin/sausage-store.jar
 Enviroment="REPORT_PATH=/opt/sausage-store/reports"
 Enviroment="LOG_PATH=/opt/sausage-store/logs"
 Restart=always
