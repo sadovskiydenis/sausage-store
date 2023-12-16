@@ -1,0 +1,11 @@
+[Unit]
+Description=Frontend service
+After=network.target
+
+[Service]
+User=frontend
+ExecStart=http-server /var/www-data/dist/frontend -p 80 --proxy http://localhost:8080
+Restart=always
+
+[Install]
+WantedBy=milti-user.target
