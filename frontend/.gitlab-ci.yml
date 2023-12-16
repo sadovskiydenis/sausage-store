@@ -9,6 +9,7 @@ stages:
   - build
   - test
   - release
+  - deploy
   - notify
 build-frontend-code-job:   # задача с именем build-code-job
   stage: build   # этап build
