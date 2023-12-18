@@ -53,7 +53,7 @@ sonarqube-frontend-sast:
 deploy:
   stage: deploy
   environment:
-    name: staging
+    name: $CI_COMMIT_REF_SLUG
     url: http://std-024-40.praktikum-services.tech/
   before_script:
     #устанавливаем ssh-agent для удобства аутентификации по ssh
