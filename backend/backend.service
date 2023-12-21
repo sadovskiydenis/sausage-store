@@ -5,6 +5,8 @@ Description=Backend service
 ExecStart=java -jar /var/www-data/bin/sausage-store.jar
 Enviroment="REPORT_PATH=/opt/sausage-store/reports"
 Enviroment="LOG_PATH=/opt/sausage-store/logs"
+StandardOutput=/var/sausage-store/logs/backend.log
+StandardError=/var/sausage-store/logs/backend_errors.log
 Restart=always
 User=backend
 
